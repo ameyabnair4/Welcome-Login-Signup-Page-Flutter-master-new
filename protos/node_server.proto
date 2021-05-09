@@ -1,0 +1,122 @@
+syntax = "proto3";
+import "google/protobuf/timestamp.proto";
+
+package nodeserver;
+
+
+service NodeServer {
+    rpc ServerListener (stream ClientRequest) returns (stream ServerResponse);
+}
+
+message User {
+    int32 userId = 1;
+    string userName = 2;
+}
+
+message Post {
+    User user = 1; // user responsible for the post
+    string postContent = 2;
+    google.protobuf.Timestamp postDateTime = 3;
+}
+
+// The request message containing the user's name that wants to "log-in".
+message ConnectRequest {
+  string userName = 1;
+}
+
+
+// When users connect, we will return their board, a # of their followers, and a # of users they follow
+message ConnectResponse
+{
+    User connectedUser = 1;
+    int32 followers = 2;
+    int32 following = 3;
+    repeated Post posts = 4;
+}
+
+message GetFollowersRequest {
+    User connectedUser = 1; // this will be the user that is connected
+}
+
+message GetFollowersResponse {
+    repeated User followers = 1;
+}
+
+
+message GetFollowingRequest {
+    User connectedUser = 1; // this will be the user that is connected
+}
+
+message GetFollowingResponse {
+    repeated User following = 1;
+}
+
+// Need to follow someone "in frontend can just type userName"
+message FollowRequest {
+    User connectedUser = 1;
+    string userNameToFollow = 2;
+}
+
+message FollowResponse {
+    bool success = 1;
+    User userWhoInitiatedFollow = 2;
+    User userWhoGotFollowed = 3;
+}
+
+// Need to follow someone "in frontend can just type userName"
+message UnFollowRequest {
+    User connectedUser = 1;
+    string userNameToUnFollow = 2;
+}
+
+message UnFollowResponse {
+    bool success = 1;
+    User userWhoInitiatedUnFollow = 2;
+    User userWhoGotUnFollowed = 3;
+}
+
+message PostRequest {
+    Post post = 1;
+}
+
+// This same post will be read in by the same client and the user's followers to update their local screen.
+message PostResponse {
+    Post post = 1;
+}
+
+message ClientRequest {
+
+    oneof RequestType {
+        ConnectRequest connectRequest = 1;
+        GetFollowersRequest followersRequest = 2;
+        GetFollowingRequest followingRequest = 3;
+        FollowRequest followRequest = 4;
+        UnFollowRequest unFollowRequest = 5;
+        PostRequest postRequest = 6;
+    }
+
+}
+
+
+// ok here we can include all different types of responses
+message ServerResponse
+{
+    oneof ResponseType {
+        ConnectResponse connectResponse = 1;
+        GetFollowersResponse followersResponse = 2;
+        GetFollowingResponse followingResponse = 3;
+        FollowResponse followResponse = 4;
+        UnFollowResponse unFollowResponse = 5;
+        PostResponse postResponse = 6;
+  }
+
+}
+
+
+
+// This story includes creating a server and being able to accept multiple connections at any given time.
+// ok so it must keep track of its current connections
+// upon connecting must send the user the feed to populate it.
+
+// It must also send periodic status to the gate-keeper to inform it that it is still operable. Will not do this afterall, the client will
+// send another request to the gatekeeping server requesting for new service server.
