@@ -196,3 +196,24 @@ const ServerResponse$json = const {
 
 /// Descriptor for `ServerResponse`. Decode as a `google.protobuf.DescriptorProto`.
 final $typed_data.Uint8List serverResponseDescriptor = $convert.base64Decode('Cg5TZXJ2ZXJSZXNwb25zZRJHCg9jb25uZWN0UmVzcG9uc2UYASABKAsyGy5ub2Rlc2VydmVyLkNvbm5lY3RSZXNwb25zZUgAUg9jb25uZWN0UmVzcG9uc2USUAoRZm9sbG93ZXJzUmVzcG9uc2UYAiABKAsyIC5ub2Rlc2VydmVyLkdldEZvbGxvd2Vyc1Jlc3BvbnNlSABSEWZvbGxvd2Vyc1Jlc3BvbnNlElAKEWZvbGxvd2luZ1Jlc3BvbnNlGAMgASgLMiAubm9kZXNlcnZlci5HZXRGb2xsb3dpbmdSZXNwb25zZUgAUhFmb2xsb3dpbmdSZXNwb25zZRJECg5mb2xsb3dSZXNwb25zZRgEIAEoCzIaLm5vZGVzZXJ2ZXIuRm9sbG93UmVzcG9uc2VIAFIOZm9sbG93UmVzcG9uc2USSgoQdW5Gb2xsb3dSZXNwb25zZRgFIAEoCzIcLm5vZGVzZXJ2ZXIuVW5Gb2xsb3dSZXNwb25zZUgAUhB1bkZvbGxvd1Jlc3BvbnNlEj4KDHBvc3RSZXNwb25zZRgGIAEoCzIYLm5vZGVzZXJ2ZXIuUG9zdFJlc3BvbnNlSABSDHBvc3RSZXNwb25zZUIOCgxSZXNwb25zZVR5cGU=');
+@$core.Deprecated('Use signUpRequestDescriptor instead')
+const SignUpRequest$json = const {
+  '1': 'SignUpRequest',
+  '2': const [
+    const {'1': 'userName', '3': 1, '4': 1, '5': 9, '10': 'userName'},
+    const {'1': 'password', '3': 2, '4': 1, '5': 9, '10': 'password'},
+  ],
+};
+
+/// Descriptor for `SignUpRequest`. Decode as a `google.protobuf.DescriptorProto`.
+final $typed_data.Uint8List signUpRequestDescriptor = $convert.base64Decode('Cg1TaWduVXBSZXF1ZXN0EhoKCHVzZXJOYW1lGAEgASgJUgh1c2VyTmFtZRIaCghwYXNzd29yZBgCIAEoCVIIcGFzc3dvcmQ=');
+@$core.Deprecated('Use signUpResponseDescriptor instead')
+const SignUpResponse$json = const {
+  '1': 'SignUpResponse',
+  '2': const [
+    const {'1': 'success', '3': 1, '4': 1, '5': 8, '10': 'success'},
+  ],
+};
+
+/// Descriptor for `SignUpResponse`. Decode as a `google.protobuf.DescriptorProto`.
+final $typed_data.Uint8List signUpResponseDescriptor = $convert.base64Decode('Cg5TaWduVXBSZXNwb25zZRIYCgdzdWNjZXNzGAEgASgIUgdzdWNjZXNz');

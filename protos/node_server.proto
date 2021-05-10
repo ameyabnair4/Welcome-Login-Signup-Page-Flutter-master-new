@@ -1,11 +1,13 @@
 syntax = "proto3";
 import "google/protobuf/timestamp.proto";
+option csharp_namespace = "Twitter.ServiceServer.Protos";
 
 package nodeserver;
 
 
 service NodeServer {
     rpc ServerListener (stream ClientRequest) returns (stream ServerResponse);
+    rpc SignUp (SignUpRequest) returns (SignUpResponse);
 }
 
 message User {
@@ -110,6 +112,18 @@ message ServerResponse
         PostResponse postResponse = 6;
   }
 
+}
+
+message SignUpRequest
+{
+    string userName = 1;
+    string password = 2;
+
+}
+
+message SignUpResponse
+{
+    bool success = 1;
 }
 
 

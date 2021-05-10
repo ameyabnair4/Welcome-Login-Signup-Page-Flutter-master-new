@@ -19,6 +19,11 @@ class NodeServerClient extends $grpc.Client {
           '/nodeserver.NodeServer/ServerListener',
           ($0.ClientRequest value) => value.writeToBuffer(),
           ($core.List<$core.int> value) => $0.ServerResponse.fromBuffer(value));
+  static final _$signUp =
+      $grpc.ClientMethod<$0.SignUpRequest, $0.SignUpResponse>(
+          '/nodeserver.NodeServer/SignUp',
+          ($0.SignUpRequest value) => value.writeToBuffer(),
+          ($core.List<$core.int> value) => $0.SignUpResponse.fromBuffer(value));
 
   NodeServerClient($grpc.ClientChannel channel,
       {$grpc.CallOptions? options,
@@ -29,6 +34,11 @@ class NodeServerClient extends $grpc.Client {
       $async.Stream<$0.ClientRequest> request,
       {$grpc.CallOptions? options}) {
     return $createStreamingCall(_$serverListener, request, options: options);
+  }
+
+  $grpc.ResponseFuture<$0.SignUpResponse> signUp($0.SignUpRequest request,
+      {$grpc.CallOptions? options}) {
+    return $createUnaryCall(_$signUp, request, options: options);
   }
 }
 
@@ -43,8 +53,22 @@ abstract class NodeServerServiceBase extends $grpc.Service {
         true,
         ($core.List<$core.int> value) => $0.ClientRequest.fromBuffer(value),
         ($0.ServerResponse value) => value.writeToBuffer()));
+    $addMethod($grpc.ServiceMethod<$0.SignUpRequest, $0.SignUpResponse>(
+        'SignUp',
+        signUp_Pre,
+        false,
+        false,
+        ($core.List<$core.int> value) => $0.SignUpRequest.fromBuffer(value),
+        ($0.SignUpResponse value) => value.writeToBuffer()));
+  }
+
+  $async.Future<$0.SignUpResponse> signUp_Pre(
+      $grpc.ServiceCall call, $async.Future<$0.SignUpRequest> request) async {
+    return signUp(call, await request);
   }
 
   $async.Stream<$0.ServerResponse> serverListener(
       $grpc.ServiceCall call, $async.Stream<$0.ClientRequest> request);
+  $async.Future<$0.SignUpResponse> signUp(
+      $grpc.ServiceCall call, $0.SignUpRequest request);
 }

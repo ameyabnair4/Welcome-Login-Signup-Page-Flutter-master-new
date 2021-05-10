@@ -9,10 +9,17 @@ import 'package:flutter_auth/components/rounded_input_field.dart';
 import 'package:flutter_auth/components/rounded_password_field.dart';
 import 'package:flutter_svg/svg.dart';
 
-class Body extends StatelessWidget {
-  const Body({
-    Key key,
-  }) : super(key: key);
+class BodyWidget extends StatefulWidget {
+  @override
+  _BodyWidgetState createState() => _BodyWidgetState();
+}
+
+class _BodyWidgetState extends State<BodyWidget> {
+
+  String _userName = "";
+  String _password = "";
+
+
 
   @override
   Widget build(BuildContext context) {
@@ -33,25 +40,22 @@ class Body extends StatelessWidget {
             ),
             SizedBox(height: size.height * 0.03),
             RoundedInputField(
-              hintText: "Your Email",
-              onChanged: (value) {},
+              hintText: "Username",
+              onChanged: (value) {
+                _userName = value;
+              },
             ),
             RoundedPasswordField(
-              onChanged: (value) {},
+              onChanged: (value) {
+                _password = value;
+              },
             ),
             RoundedButton(
               text: "LOGIN",
               color: kBlueColor,
               textColor: Colors.white,
               press: () {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                    builder: (context) {
-                      return UserHomeScreen();
-                    },
-                  ),
-                );
+                print("Hi");
               },
             ),
             SizedBox(height: size.height * 0.03),
@@ -72,4 +76,9 @@ class Body extends StatelessWidget {
       ),
     );
   }
+
+
 }
+
+
+

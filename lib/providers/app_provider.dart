@@ -8,79 +8,54 @@ import 'package:validators/sanitizers.dart';
 import 'package:grpc/grpc.dart';
 
 
-// To notify Auth screen when login fails/succeeds
-
 // I am going to say we currently do have authentication but subsequent requests aren't protected
 class AppProvider with ChangeNotifier {
-  String _email;
-  String _password;
-  String _name;
 
-  String get name {
-    return _name;
+  String _userName;
+
+  String get userName {
+    return _userName;
   }
 
 
-  String get email {
-    return _email;
-  }
-
-  NodeServerClient nodeServerClient = NodeServerClient(
-      ClientChannel('todoworld.servicestack.net', port:50054,
-          options:ChannelOptions(credentials: ChannelCredentials.insecure())));
-
-
-  // Implement the Log-In
-  Future<void> login(String emailParam, String password) async {
-
-    Stream<ClientRequest> outgoingNotes;
-
-    final responses = nodeServerClient.serverListener(outgoingNotes);
-    await for (var note in responses) {
-    print('Got message ${note.message} at ${note.location.latitude}, ${note
-        .location.longitude}');
-    }
-
-    // will it go here?
-    // what i want to do is launch an async call and handle responses accordingly and then notify listeners. first one is login cmon i can do this
-
-    const url = 'https://fleetinvoicing.app/mobile/auth';
-    //const url = 'http://52.14.48.191:8080/mobile/auth';
-    var email = normalizeEmail(emailParam);
-    //var email = emailParam;
+  // Implement the Sign-Up
+  Future<bool> SignUp(String userName, String password) async {
     try {
-      final response = await http.post(url,
-          headers: {
-            'Content-Type': 'application/json',
-            'Accept': 'application/json'
-          },
-          body: json.encode(
-            {'email': email, 'password': password},
-          ));
-      //print(json.decode(response.body));
-      final data = json.decode(response.body);
-      print(data);
-      if (data['error'] != null) {
-        throw HttpException(data['error']);
+      // One off channel
+      // this ip address is use if you are using the android emulator
+      ClientChannel _clientChannel = ClientChannel('10.0.2.2', port: 5000,
+          options:ChannelOptions(credentials: ChannelCredentials.insecure()));
+
+      NodeServerClient nodeServerClient = NodeServerClient(_clientChannel);
+
+      final signUpRequest = SignUpRequest(userName: userName, password: password);
+
+      final signUpResponse = await nodeServerClient.signUp(signUpRequest);
+      print(signUpResponse);
+
+      if (signUpResponse.success)
+      {
+        notifyListeners();
+        return true;
       }
-      // will get here if no error in above if statement
-      _name = data['name'];
-      _email = email;
-
-      notifyListeners();
-
-      return response;
-    } catch (error) {
-      throw error;
-      //this is for like network errors and stuff
+      else {
+        return false;
+      }
     }
+
+    on GrpcError catch (error)
+    {
+      print(error.toString());
+      return false;
+    }
+
+
   }
 
 
   Future<void> logout() async {
 
-    _name = null;
-    _email = null;
+    _userName = null;
 
     notifyListeners();
 
