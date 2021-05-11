@@ -8,6 +8,7 @@ package nodeserver;
 service NodeServer {
     rpc ServerListener (stream ClientRequest) returns (stream ServerResponse);
     rpc SignUp (SignUpRequest) returns (SignUpResponse);
+    rpc LogIn (LogInRequest) returns (ConnectResponse);
 }
 
 message User {
@@ -34,6 +35,8 @@ message ConnectResponse
     int32 followers = 2;
     int32 following = 3;
     repeated Post posts = 4;
+    bool success = 5;
+
 }
 
 message GetFollowersRequest {
@@ -111,6 +114,13 @@ message ServerResponse
         UnFollowResponse unFollowResponse = 5;
         PostResponse postResponse = 6;
   }
+
+}
+
+message LogInRequest
+{
+    string userName = 1;
+    string password = 2;
 
 }
 

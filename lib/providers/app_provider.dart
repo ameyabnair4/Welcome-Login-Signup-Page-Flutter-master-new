@@ -12,9 +12,19 @@ import 'package:grpc/grpc.dart';
 class AppProvider with ChangeNotifier {
 
   String _userName;
+  int _followers = 0;
+  int _following = 0;
 
   String get userName {
     return _userName;
+  }
+
+  int get followers {
+    return _followers;
+  }
+
+  int get following {
+    return _following;
   }
 
 
@@ -48,8 +58,41 @@ class AppProvider with ChangeNotifier {
       print(error.toString());
       return false;
     }
+  }
 
+  // Implement the Login
+  Future<bool> LogIn(String userName, String password) async {
+    try {
+      // One off channel
+      // this ip address is use if you are using the android emulator
+      ClientChannel _clientChannel = ClientChannel('10.0.2.2', port: 5000,
+          options:ChannelOptions(credentials: ChannelCredentials.insecure()));
 
+      NodeServerClient nodeServerClient = NodeServerClient(_clientChannel);
+
+      final logInRequest = LogInRequest(userName: userName, password: password);
+
+      final logInResponse = await nodeServerClient.logIn(logInRequest);
+      print(logInResponse);
+
+      if (logInResponse.success)
+      {
+        _followers = logInResponse.followers;
+        _following = logInResponse.following;
+        _userName = logInResponse.connectedUser.userName;
+        notifyListeners();
+        return true;
+      }
+      else {
+        return false;
+      }
+    }
+
+    on GrpcError catch (error)
+    {
+      print(error.toString());
+      return false;
+    }
   }
 
 

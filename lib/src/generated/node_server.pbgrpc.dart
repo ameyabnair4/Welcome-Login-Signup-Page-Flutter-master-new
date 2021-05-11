@@ -24,6 +24,12 @@ class NodeServerClient extends $grpc.Client {
           '/nodeserver.NodeServer/SignUp',
           ($0.SignUpRequest value) => value.writeToBuffer(),
           ($core.List<$core.int> value) => $0.SignUpResponse.fromBuffer(value));
+  static final _$logIn =
+      $grpc.ClientMethod<$0.LogInRequest, $0.ConnectResponse>(
+          '/nodeserver.NodeServer/LogIn',
+          ($0.LogInRequest value) => value.writeToBuffer(),
+          ($core.List<$core.int> value) =>
+              $0.ConnectResponse.fromBuffer(value));
 
   NodeServerClient($grpc.ClientChannel channel,
       {$grpc.CallOptions? options,
@@ -39,6 +45,11 @@ class NodeServerClient extends $grpc.Client {
   $grpc.ResponseFuture<$0.SignUpResponse> signUp($0.SignUpRequest request,
       {$grpc.CallOptions? options}) {
     return $createUnaryCall(_$signUp, request, options: options);
+  }
+
+  $grpc.ResponseFuture<$0.ConnectResponse> logIn($0.LogInRequest request,
+      {$grpc.CallOptions? options}) {
+    return $createUnaryCall(_$logIn, request, options: options);
   }
 }
 
@@ -60,6 +71,13 @@ abstract class NodeServerServiceBase extends $grpc.Service {
         false,
         ($core.List<$core.int> value) => $0.SignUpRequest.fromBuffer(value),
         ($0.SignUpResponse value) => value.writeToBuffer()));
+    $addMethod($grpc.ServiceMethod<$0.LogInRequest, $0.ConnectResponse>(
+        'LogIn',
+        logIn_Pre,
+        false,
+        false,
+        ($core.List<$core.int> value) => $0.LogInRequest.fromBuffer(value),
+        ($0.ConnectResponse value) => value.writeToBuffer()));
   }
 
   $async.Future<$0.SignUpResponse> signUp_Pre(
@@ -67,8 +85,15 @@ abstract class NodeServerServiceBase extends $grpc.Service {
     return signUp(call, await request);
   }
 
+  $async.Future<$0.ConnectResponse> logIn_Pre(
+      $grpc.ServiceCall call, $async.Future<$0.LogInRequest> request) async {
+    return logIn(call, await request);
+  }
+
   $async.Stream<$0.ServerResponse> serverListener(
       $grpc.ServiceCall call, $async.Stream<$0.ClientRequest> request);
   $async.Future<$0.SignUpResponse> signUp(
       $grpc.ServiceCall call, $0.SignUpRequest request);
+  $async.Future<$0.ConnectResponse> logIn(
+      $grpc.ServiceCall call, $0.LogInRequest request);
 }

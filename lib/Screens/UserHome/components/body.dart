@@ -7,12 +7,19 @@ import 'package:flutter_auth/components/rounded_input_field.dart';
 import 'package:flutter_auth/components/rounded_password_field.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:flutter_auth/constants.dart';
+import 'package:flutter_auth/providers/app_provider.dart';
+import 'package:provider/provider.dart';
 
 import 'package:flutter/material.dart';
 
 
+class Body extends StatefulWidget {
+  @override
+  _BodyState createState() => _BodyState();
+}
 
-class Body extends StatelessWidget {
+class _BodyState extends State<Body> {
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -69,14 +76,18 @@ class Body extends StatelessWidget {
                                     SizedBox(
                                       height: 20,
                                     ),
-                                    Text(
-                                      'Sarah Sarah',
-                                      style: TextStyle(
-                                        fontSize: 24,
-                                        color: kBlueColor,
-                                        fontWeight: FontWeight.w500,
-                                      ),
-                                    ),
+                                    Consumer<AppProvider>(
+                                      builder: (context, provider, child) {
+                                        return                                 Text(
+                                          '${provider.userName}',
+                                          style: TextStyle(
+                                            fontSize: 24,
+                                            color: kBlueColor,
+                                            fontWeight: FontWeight.w500,
+                                          ),
+                                        );
+                                      },
+                                    ) ,
                                     Text('Houston'),
                                     SizedBox(
                                       height: 20,
@@ -141,13 +152,18 @@ class Body extends StatelessWidget {
                               ),
                               Column(
                                 children: [
-                                  Text(
-                                    '6',
-                                    style: TextStyle(
-                                      fontSize: 24,
-                                      color: kBlueColor,
-                                    ),
-                                  ),
+                                  Consumer<AppProvider>(
+                                    builder: (context, provider, child) {
+                                      return Text(
+                                        '${provider.followers}',
+                                        style: TextStyle(
+                                          fontSize: 24,
+                                          color: kBlueColor,
+                                        ),
+                                      );
+                                    },
+                                  )
+,
                                   SizedBox(
                                     height: 4,
                                   ),
@@ -161,12 +177,16 @@ class Body extends StatelessWidget {
                               ),
                               Column(
                                 children: [
-                                  Text(
-                                    '4',
-                                    style: TextStyle(
-                                      fontSize: 24,
-                                      color: kBlueColor,
-                                    ),
+                                  Consumer<AppProvider>(
+                                    builder: (context, provider, child) {
+                                      return Text(
+                                        '${provider.following}',
+                                        style: TextStyle(
+                                          fontSize: 24,
+                                          color: kBlueColor,
+                                        ),
+                                      );
+                                    },
                                   ),
                                   SizedBox(
                                     height: 4,
@@ -421,7 +441,10 @@ class Body extends StatelessWidget {
       ),
     );
   }
+
 }
+
+
 /*import 'package:flutter/material.dart';
 import 'package:flutter_auth/Screens/Login/login_screen.dart';
 import 'package:flutter_auth/Screens/Signup/signup_screen.dart';

@@ -49,11 +49,12 @@ const ConnectResponse$json = const {
     const {'1': 'followers', '3': 2, '4': 1, '5': 5, '10': 'followers'},
     const {'1': 'following', '3': 3, '4': 1, '5': 5, '10': 'following'},
     const {'1': 'posts', '3': 4, '4': 3, '5': 11, '6': '.nodeserver.Post', '10': 'posts'},
+    const {'1': 'success', '3': 5, '4': 1, '5': 8, '10': 'success'},
   ],
 };
 
 /// Descriptor for `ConnectResponse`. Decode as a `google.protobuf.DescriptorProto`.
-final $typed_data.Uint8List connectResponseDescriptor = $convert.base64Decode('Cg9Db25uZWN0UmVzcG9uc2USNgoNY29ubmVjdGVkVXNlchgBIAEoCzIQLm5vZGVzZXJ2ZXIuVXNlclINY29ubmVjdGVkVXNlchIcCglmb2xsb3dlcnMYAiABKAVSCWZvbGxvd2VycxIcCglmb2xsb3dpbmcYAyABKAVSCWZvbGxvd2luZxImCgVwb3N0cxgEIAMoCzIQLm5vZGVzZXJ2ZXIuUG9zdFIFcG9zdHM=');
+final $typed_data.Uint8List connectResponseDescriptor = $convert.base64Decode('Cg9Db25uZWN0UmVzcG9uc2USNgoNY29ubmVjdGVkVXNlchgBIAEoCzIQLm5vZGVzZXJ2ZXIuVXNlclINY29ubmVjdGVkVXNlchIcCglmb2xsb3dlcnMYAiABKAVSCWZvbGxvd2VycxIcCglmb2xsb3dpbmcYAyABKAVSCWZvbGxvd2luZxImCgVwb3N0cxgEIAMoCzIQLm5vZGVzZXJ2ZXIuUG9zdFIFcG9zdHMSGAoHc3VjY2VzcxgFIAEoCFIHc3VjY2Vzcw==');
 @$core.Deprecated('Use getFollowersRequestDescriptor instead')
 const GetFollowersRequest$json = const {
   '1': 'GetFollowersRequest',
@@ -196,6 +197,17 @@ const ServerResponse$json = const {
 
 /// Descriptor for `ServerResponse`. Decode as a `google.protobuf.DescriptorProto`.
 final $typed_data.Uint8List serverResponseDescriptor = $convert.base64Decode('Cg5TZXJ2ZXJSZXNwb25zZRJHCg9jb25uZWN0UmVzcG9uc2UYASABKAsyGy5ub2Rlc2VydmVyLkNvbm5lY3RSZXNwb25zZUgAUg9jb25uZWN0UmVzcG9uc2USUAoRZm9sbG93ZXJzUmVzcG9uc2UYAiABKAsyIC5ub2Rlc2VydmVyLkdldEZvbGxvd2Vyc1Jlc3BvbnNlSABSEWZvbGxvd2Vyc1Jlc3BvbnNlElAKEWZvbGxvd2luZ1Jlc3BvbnNlGAMgASgLMiAubm9kZXNlcnZlci5HZXRGb2xsb3dpbmdSZXNwb25zZUgAUhFmb2xsb3dpbmdSZXNwb25zZRJECg5mb2xsb3dSZXNwb25zZRgEIAEoCzIaLm5vZGVzZXJ2ZXIuRm9sbG93UmVzcG9uc2VIAFIOZm9sbG93UmVzcG9uc2USSgoQdW5Gb2xsb3dSZXNwb25zZRgFIAEoCzIcLm5vZGVzZXJ2ZXIuVW5Gb2xsb3dSZXNwb25zZUgAUhB1bkZvbGxvd1Jlc3BvbnNlEj4KDHBvc3RSZXNwb25zZRgGIAEoCzIYLm5vZGVzZXJ2ZXIuUG9zdFJlc3BvbnNlSABSDHBvc3RSZXNwb25zZUIOCgxSZXNwb25zZVR5cGU=');
+@$core.Deprecated('Use logInRequestDescriptor instead')
+const LogInRequest$json = const {
+  '1': 'LogInRequest',
+  '2': const [
+    const {'1': 'userName', '3': 1, '4': 1, '5': 9, '10': 'userName'},
+    const {'1': 'password', '3': 2, '4': 1, '5': 9, '10': 'password'},
+  ],
+};
+
+/// Descriptor for `LogInRequest`. Decode as a `google.protobuf.DescriptorProto`.
+final $typed_data.Uint8List logInRequestDescriptor = $convert.base64Decode('CgxMb2dJblJlcXVlc3QSGgoIdXNlck5hbWUYASABKAlSCHVzZXJOYW1lEhoKCHBhc3N3b3JkGAIgASgJUghwYXNzd29yZA==');
 @$core.Deprecated('Use signUpRequestDescriptor instead')
 const SignUpRequest$json = const {
   '1': 'SignUpRequest',

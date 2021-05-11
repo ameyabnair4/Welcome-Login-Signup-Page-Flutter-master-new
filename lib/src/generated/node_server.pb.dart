@@ -204,6 +204,7 @@ class ConnectResponse extends $pb.GeneratedMessage {
     ..a<$core.int>(2, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'followers', $pb.PbFieldType.O3)
     ..a<$core.int>(3, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'following', $pb.PbFieldType.O3)
     ..pc<Post>(4, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'posts', $pb.PbFieldType.PM, subBuilder: Post.create)
+    ..aOB(5, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'success')
     ..hasRequiredFields = false
   ;
 
@@ -213,6 +214,7 @@ class ConnectResponse extends $pb.GeneratedMessage {
     $core.int? followers,
     $core.int? following,
     $core.Iterable<Post>? posts,
+    $core.bool? success,
   }) {
     final _result = create();
     if (connectedUser != null) {
@@ -226,6 +228,9 @@ class ConnectResponse extends $pb.GeneratedMessage {
     }
     if (posts != null) {
       _result.posts.addAll(posts);
+    }
+    if (success != null) {
+      _result.success = success;
     }
     return _result;
   }
@@ -281,6 +286,15 @@ class ConnectResponse extends $pb.GeneratedMessage {
 
   @$pb.TagNumber(4)
   $core.List<Post> get posts => $_getList(3);
+
+  @$pb.TagNumber(5)
+  $core.bool get success => $_getBF(4);
+  @$pb.TagNumber(5)
+  set success($core.bool v) { $_setBool(4, v); }
+  @$pb.TagNumber(5)
+  $core.bool hasSuccess() => $_has(4);
+  @$pb.TagNumber(5)
+  void clearSuccess() => clearField(5);
 }
 
 class GetFollowersRequest extends $pb.GeneratedMessage {
@@ -1147,6 +1161,67 @@ class ServerResponse extends $pb.GeneratedMessage {
   void clearPostResponse() => clearField(6);
   @$pb.TagNumber(6)
   PostResponse ensurePostResponse() => $_ensure(5);
+}
+
+class LogInRequest extends $pb.GeneratedMessage {
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(const $core.bool.fromEnvironment('protobuf.omit_message_names') ? '' : 'LogInRequest', package: const $pb.PackageName(const $core.bool.fromEnvironment('protobuf.omit_message_names') ? '' : 'nodeserver'), createEmptyInstance: create)
+    ..aOS(1, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'userName', protoName: 'userName')
+    ..aOS(2, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'password')
+    ..hasRequiredFields = false
+  ;
+
+  LogInRequest._() : super();
+  factory LogInRequest({
+    $core.String? userName,
+    $core.String? password,
+  }) {
+    final _result = create();
+    if (userName != null) {
+      _result.userName = userName;
+    }
+    if (password != null) {
+      _result.password = password;
+    }
+    return _result;
+  }
+  factory LogInRequest.fromBuffer($core.List<$core.int> i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(i, r);
+  factory LogInRequest.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
+  @$core.Deprecated(
+  'Using this can add significant overhead to your binary. '
+  'Use [GeneratedMessageGenericExtensions.deepCopy] instead. '
+  'Will be removed in next major version')
+  LogInRequest clone() => LogInRequest()..mergeFromMessage(this);
+  @$core.Deprecated(
+  'Using this can add significant overhead to your binary. '
+  'Use [GeneratedMessageGenericExtensions.rebuild] instead. '
+  'Will be removed in next major version')
+  LogInRequest copyWith(void Function(LogInRequest) updates) => super.copyWith((message) => updates(message as LogInRequest)) as LogInRequest; // ignore: deprecated_member_use
+  $pb.BuilderInfo get info_ => _i;
+  @$core.pragma('dart2js:noInline')
+  static LogInRequest create() => LogInRequest._();
+  LogInRequest createEmptyInstance() => create();
+  static $pb.PbList<LogInRequest> createRepeated() => $pb.PbList<LogInRequest>();
+  @$core.pragma('dart2js:noInline')
+  static LogInRequest getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<LogInRequest>(create);
+  static LogInRequest? _defaultInstance;
+
+  @$pb.TagNumber(1)
+  $core.String get userName => $_getSZ(0);
+  @$pb.TagNumber(1)
+  set userName($core.String v) { $_setString(0, v); }
+  @$pb.TagNumber(1)
+  $core.bool hasUserName() => $_has(0);
+  @$pb.TagNumber(1)
+  void clearUserName() => clearField(1);
+
+  @$pb.TagNumber(2)
+  $core.String get password => $_getSZ(1);
+  @$pb.TagNumber(2)
+  set password($core.String v) { $_setString(1, v); }
+  @$pb.TagNumber(2)
+  $core.bool hasPassword() => $_has(1);
+  @$pb.TagNumber(2)
+  void clearPassword() => clearField(2);
 }
 
 class SignUpRequest extends $pb.GeneratedMessage {
